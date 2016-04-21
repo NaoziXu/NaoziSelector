@@ -1,0 +1,145 @@
+﻿.naoziSelectorMain{
+	max-width: 400px;
+	box-shadow: 3px 3px 2px rgba(0,0,0,0.1);
+	border-left: 1px solid rgba(0,0,0,0.07);
+	border-top: 1px solid rgba(0,0,0,0.07);
+	left: 0px;
+	right: 0px;
+	z-index: 20000;
+	background-color: #FFF;
+	font-family: 'Helvetica Neue',Helvetica,'Microsoft Yahei',Arial,sans-serif;
+	line-height: 1; 
+	position: absolute;
+}
+.naoziSelectorSearch{
+	max-width: 200px;
+	box-shadow: 3px 3px 2px rgba(0,0,0,0.1);
+	border-left: 1px solid rgba(0,0,0,0.07);
+	border-top: 1px solid rgba(0,0,0,0.07);
+	left: 0px;
+	right: 0px;
+	z-index: 20000;
+	background-color: #FFF;
+	font-family: 'Helvetica Neue',Helvetica,'Microsoft Yahei',Arial,sans-serif;
+	line-height: 1;
+	position: absolute;
+}
+.naoziSelectorMain .main{
+	width: 100%;
+	overflow: hidden;
+}
+.naoziSelectorSearch .main{
+	width: 100%;
+	overflow: hidden;
+}
+.naoziSelectorMain .main .content{
+	width: 100%;
+	max-height: 265px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	border-top: 2px solid #2eab57;
+}
+.naoziSelectorSearch .main .content{
+	width: 100%;
+	max-height: 265px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+.naoziSelectorMain .main .top{
+	width: 100%;
+	position: relative;
+}
+.naoziSelectorMain .main .top ul{
+	width: 380px;
+	margin: 4px 0px 0px 0px;
+    padding-left: 2%;
+}
+.naoziSelectorMain .main .top ul li{
+	list-style: none;
+	float: left;
+	font-size: 13px;
+	cursor: pointer;
+	color: #696969;
+	font-family: '微软雅黑';
+	padding-top: 6px;
+	padding-bottom: 6px;
+	padding-left: 2%;
+	padding-right: 2%;
+	letter-spacing: 1px;
+	text-align: center;
+}
+.naoziSelectorMain .main .top ul li:hover{
+	background: #F5F5F5;
+}
+.naoziSelectorMain .main .top ul li.open{
+	background: #2eab57;
+	color: #fff;
+}
+.naoziSelectorMain .main .close {
+	position: absolute;
+	right: 7px;
+	margin: 6px 0px 0px 0px;
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	overflow: hidden;
+	cursor: pointer;
+    background: url("../img/naoziSelectorClose.png");
+    background-position: center;
+	background-repeat: no-repeat;
+}
+.naoziSelectorMain .main .content ul{
+	margin: 0px;
+	padding-top: 1.8%;
+    padding-left: inherit;
+}
+.naoziSelectorSearch .main .content ul{
+	margin: 0px;
+	padding-top: 3%;
+    padding-left: inherit;
+}
+.naoziSelectorMain .main .content ul li{
+	list-style: none;
+	font-size: 13px;
+	float: left;
+	width: 18%;
+	color: #696969;
+	text-align: center;
+	padding: 5px 0px 5px 0px;
+	margin-left: 1.8%;
+	margin-bottom: 1.8%;
+	background: #F5F5F5;
+	cursor: pointer;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+.naoziSelectorSearch .main .content ul li{
+	list-style: none;
+	font-size: 13px;
+	float: left;
+	width: 45%;
+	color: #696969;
+	text-align: center;
+	padding: 5px 0px 5px 0px;
+	margin-left: 3.5%;
+	margin-bottom: 3%;
+	background: #F5F5F5;
+	cursor: pointer;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+.naoziSelectorMain .main .content ul li:hover,
+.naoziSelectorSearch .main .content ul li:hover{
+	background: #55D773;
+	color: #fff;	
+}
+.naoziSelectorMain .main .content ul li.open,
+.naoziSelectorSearch .main .content ul li.open{
+	background: rgba(46,171,87,0.7);
+	color: #fff;	
+}
+.naoziSelectorDisplayNone{
+	display:none!important;
+}

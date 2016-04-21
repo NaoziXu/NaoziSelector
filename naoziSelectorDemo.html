@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>naoziSelector</title>
+</head>
+<body style="text-align:center;">
+	<script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+	<script src="naoziSelector/js/naoziSelector.min.js"></script>
+	<script src="testDataList.js"></script>
+	<script type="text/javascript">
+	function addNaoziSelectorToInput(){
+		//get datas from js document 从文件获取数据源列表
+		var cityDataList = testDataList;
+		//init a city selector 定义一个城市选择器
+		$("#naoziSelectorInput").naoziSelector({
+			//three nesessary parameters 三个必要参数	
+			//collection of data objects & display property name 数据对象集合以及展示属性名
+			data: {
+				dataArray: cityDataList,
+				displayProperty: "name"			
+			},
+			//collection of tab objects & display property name 列表头对象集合以及展示属性名
+			tabs: {
+				tabDataArray: [
+					{key:0,value:"abcd",title:"ABCD"},
+					{key:1,value:"efgh",title:"EFGH"},
+					{key:2,value:"ijkl",title:"IJKL"},
+					{key:3,value:"mnop",title:"MNOP"},
+					{key:4,value:"qrst",title:"QRST"},
+					{key:5,value:"uvwx",title:"UVWX"},
+					{key:6,value:"yz",title:"YZ"}],
+				tabDispalyProperty: "title"
+			},
+			//sieving rules between tab object & data object 表头对象和数据源对象之间的筛选方法
+			sievingRules:function(tabObject,dataObject){
+				if(dataObject.pinyin != null){
+					var pinyinFirst = dataObject.pinyin.charAt(0);
+					if(tabObject.value.indexOf(pinyinFirst) > -1){
+						return true;
+					}
+				}
+				return false;
+			},
+			//unnesessary paramaters 非必要参数
+			//properties of page element 自定义元素属性名
+			extraElementPropertys: [{dataProperty:"name",elementProperty:"title"}],
+			//data search 自定义搜索
+			dataSearch: {
+				//wheather to search 是否开启搜索
+				isOn:true,
+				//matching rules for data object & input String 数据源对象和输入内容的匹配方法
+				dataSearchRules:function(dataObject,inputString){
+					//inputString is a childString of dataObject.pinyin 输入为拼音属性的子串
+					var searchInputInData = function(index,input,data){
+						for(var i=0;i<data.length;i++){
+							if(input.charAt(index)==data.charAt(i)){
+								if((index+1) < input.length){
+									index++;
+									continue;
+								}
+								else{
+									return true;
+								}
+							}
+						}
+						return false;
+					}
+					var pinyinHasAllChar = searchInputInData(0,inputString,dataObject.pinyin);
+					var nameHasAllChar = searchInputInData(0,inputString,dataObject.name);
+					return (pinyinHasAllChar||nameHasAllChar);
+				}
+			},
+			//callback function 自定义回调函数
+			callBackFunction: function(clickDataItem){
+				if(finalDirection){
+					selectedCity = clickDataItem.title;
+					$("#naoziSelectorButton").val("Enjoy coding with naoziSelector!");
+					alert("The data you searched is  "+clickDataItem.title);
+					selectedCity = "";
+				}
+				else{
+					$("#naoziSelectorButton").val("Click input and start the selector again!");
+					selectedCity = clickDataItem.title;
+					alert("The data you selected is "+clickDataItem.title);
+				}
+			}
+			/*
+			 *there has introduce about how to use the other unnesessary paramaters in ReadMe.txt 
+			 *其他非必要参数使用说明见ReadMe.txt
+			 */
+		});
+		//demo Direction start 导航demo开始
+		$("#naoziSelectorButton").attr("disabled","disabled");
+		$("#naoziSelectorButton").val("Added naoziSelector for input!");
+		$("#naoziSelectorInput").attr("placeholder","Click here to turn on the selector!");
+		inputClickedAfterAdded = true;
+	}
+	function demoDirect(){
+		if(inputClickedAfterAdded){
+			$("#naoziSelectorInput").attr("placeholder","Choose any city you like!");
+		}
+		if(!selectedCity == ""){
+			setTimeout("demoDirectSecond();",10);
+		}
+	}
+	function demoDirectSecond(){
+		$("#naoziSelectorInput").val("Type the name/Pinyin of a city you want!");
+		$("#naoziSelectorInput").select();
+		finalDirection = true;
+		$("#naoziSelectorInput").keyup(function(){
+			demoDirectorThird();
+		});
+	}
+	function demoDirectorThird(){
+		if(finalDirection){
+			$("#naoziSelectorButton").val("Choose the city you search!");
+		}
+	}
+	</script>
+	<div style="margin-left:auto; margin-right:auto; margin-top: 150px;">
+		<input id="naoziSelectorInput" type="text" placeholder="Click button to add a naoziSelector!" onclick="demoDirect();" style="width:250px;" />
+		<input id="naoziSelectorButton" type="button" value="Click this to add a naoziSelector!" onclick="addNaoziSelectorToInput();" style="width:250px;" />
+	</div>
+	<script type="text/javascript">
+	var inputClickedAfterAdded = false;
+	var finalDirection = false;
+	var selectedCity = "";
+	document.getElementById("naoziSelectorInput").disabled = false;
+	document.getElementById("naoziSelectorButton").disabled = false;
+	document.getElementById("naoziSelectorInput").value = "";
+	document.getElementById("naoziSelectorButton").value = "Click this to add a naoziSelector";
+	</script>
+</body>
+</html>
